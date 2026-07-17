@@ -23,6 +23,8 @@ WORKDIR /var/www
 
 COPY . .
 
+RUN mkdir -p database && touch database/database.sqlite
+
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
