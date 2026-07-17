@@ -72,6 +72,23 @@
       margin-bottom: 16px;
     }
 
+    .project-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .project-gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-panel-2);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    }
+
     .diff-box {
       margin-top: 48px;
       background: var(--bg-panel-2);
@@ -136,9 +153,13 @@
           {!! \Illuminate\Support\Str::markdown($project['content']) !!}  
         </div>
 
-        <div class='project-photo'>
-          <img src="images/profile.png" alt="Bentuyuns">
-        </div>
+        @if(!empty($project['photos']))
+          <div class="project-gallery">
+            @foreach($project['photos'] as $photo)
+              <img src="{{ asset($photo) }}" alt="{{ $project['title'] }} screenshot">
+            @endforeach
+          </div>
+        @endif
 
         @if(!empty($project['diff']))
         <div class="diff-box">
